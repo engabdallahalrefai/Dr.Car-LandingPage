@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dr.Car | منصة المركبات المدعومة بالذكاء الاصطناعي</title>
+    <meta name="description" content="منصة ذكية تحلل أعراض مركبتك باستخدام الذكاء الاصطناعي وتربطك بأفضل خدمات السيارات.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <!-- External Libraries (CSS) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & THEME
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --primary: #46ABE5;
+            --primary-hover: #3598d1;
+            --primary-glow: rgba(70, 171, 229, 0.4);
+            
+            --white: #FFFFFF;
+            --gray: #707070;
+            --gray-light: #A0A0A0;
+            
+            --bg-dark: #08131F;
+            --bg-surface: #10253B;
+            --bg-surface-glass: rgba(16, 37, 59, 0.6);
+            
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-bg-hover: rgba(255, 255, 255, 0.06);
+            
+            /* Typography */
+            --font-ar: 'Cairo', sans-serif;
+            --font-en: 'Poppins', sans-serif;
+            
+            /* Spacing & Layout */
+            --section-padding: 120px 0;
+            --container-width: 1280px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 40px;
+            
+            /* Transitions */
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+/* STREAMING_CHUNK:Configuring Swiper layout and variables... /
+/ ==========================================================================
+Dr.Car Swiper & App Screens Stylesheet
+========================================================================== */
+
+            .screens-section {
+            padding: var(--section-padding, 120px 0);
+            overflow: hidden;
+            }
+
+            .swiper-container {
+            width: 100%;
+            padding: 60px 0;
+            overflow: visible;
+            direction: ltr;
+            }
+
+            .swiper-slide {
+            width: 300px;
+            transition: var(--transition-smooth, 0.4s cubic-bezier(0.16, 1, 0.3, 1));
+            opacity: 0.4;
+            transform: scale(0.85);
+            }
+
+            .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+            }
+
+            /* STREAMING_CHUNK:Styling screen mockup container with rounded borders... */
+            .screen-mockup {
+            width: 100%;
+            border-radius: 36px;
+            border: 10px solid #1a1a1a;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(70, 171, 229, 0.15);
+            background: #08131F;
+            overflow: hidden;
+            aspect-ratio: 9 / 19.5;
+            position: relative;
+            }
+
+            /* STREAMING_CHUNK:Styling internal app screen components... */
+            .ui-screen {
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            direction: rtl;
+            text-align: right;
+            background: linear-gradient(180deg, #10253B 0%, #08131F 100%);
+            font-family: var(--font-ar, 'Cairo', sans-serif);
+            color: var(--white, #FFFFFF);
+            }
+
+            .ui-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            }
+
+            .ui-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            }
+
+            .ui-icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            }
+
+            .ui-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            }
+
+            .ui-card.primary {
+            background: linear-gradient(135deg, var(--primary, #46ABE5) 0%, #3598d1 100%);
+            border: none;
+            }
+
+            .ui-flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            }
+
+            .ui-text-sm {
+            font-size: 0.8rem;
+            color: var(--gray-light, #A0A0A0);
+            }
+
+            .ui-text-xs {
+            font-size: 0.7rem;
+            color: var(--gray-light, #A0A0A0);
+            }
+
+            .ui-main-btn {
+            background: var(--primary, #46ABE5);
+            color: white;
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            font-weight: 700;
+            margin-top: auto;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            }
+
+            .ui-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+            }
+
+            .ui-stat-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid rgba(70, 171, 229, 0.2);
+            border-top-color: var(--primary, #46ABE5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.2rem;
+            }
+
+            .ui-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .ui-list-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            }
+
+            .ui-list-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(70, 171, 229, 0.1);
+            color: var(--primary, #46ABE5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            }
+
+            .ui-map-area {
+            height: 140px;
+            border-radius: 16px;
+            background-color: #0d1f33;
+            margin-bottom: 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .ui-pin {
+            color: #ff4757;
+            font-size: 2.5rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.5));
+            }
+
+            .ui-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(70, 171, 229, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary, #46ABE5);
+            margin: 0 auto 12px;
+            border: 2px solid var(--primary, #46ABE5);
+            }
+        
+/* ==========================================================
+                     Premium Phone Mockup
+   ========================================================== */
+
+        .phone-frame{
+            position: relative;
+            width: 300px;
+            height: 620px;
+            margin: auto;
+
+            padding: 12px;
+
+            border-radius: 42px;
+
+            background: linear-gradient(
+                145deg,
+                #1d2734,
+                #0b121d
+            );
+
+            border: 2px solid rgba(255,255,255,.08);
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.45),
+                0 35px 80px rgba(70,171,229,.25);
+
+            animation: phoneFloat 6s ease-in-out infinite;
+
+            transition: .4s;
+        }
+
+        .phone-frame:hover{
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 20px 40px rgba(0,0,0,.45),
+                0 45px 120px rgba(70,171,229,.45);
+
+        }
+
+        /* الشاشة */
+
+        .phone-frame img{
+
+            width:100%;
+            height:100%;
+
+            object-fit:cover;
+
+            border-radius:30px;
+
+            display:block;
+
+        }
+
+        /* Notch */
+
+        .phone-frame::before{
+
+            content:"";
+
+            position:absolute;
+
+            top:10px;
+
+            left:50%;
+
+            transform:translateX(-50%);
+
+            width:120px;
+
+            height:26px;
+
+            background:#000;
+
+            border-radius:0 0 18px 18px;
+
+            z-index:20;
+
+        }
+
+        /* الكاميرا */
+
+        .phone-frame .camera{
+
+            position:absolute;
+
+            top:18px;
+
+            left:50%;
+
+            transform:translateX(-50%);
+
+            width:10px;
+
+            height:10px;
+
+            border-radius:50%;
+
+            background:#222;
+
+            z-index:25;
+
+            box-shadow:
+                0 0 0 2px #111,
+                inset 0 0 4px rgba(255,255,255,.2);
+
+        }
+
+        /* السماعة */
+
+        .phone-frame .speaker{
+
+            position:absolute;
+
+            top:18px;
+
+            left:50%;
+
+            transform:translateX(-50%);
+
+            width:55px;
+
+            height:5px;
+
+            background:#333;
+
+            border-radius:50px;
+
+            z-index:24;
+
+        }
+
+        /* الانعكاس */
+
+        .phone-frame::after{
+
+            content:"";
+
+            position:absolute;
+
+            top:-70%;
+
+            left:-140%;
+
+            width:70%;
+
+            height:240%;
+
+            transform:rotate(22deg);
+
+            background:linear-gradient(
+
+                90deg,
+
+                transparent,
+
+                rgba(255,255,255,.22),
+
+                transparent
+
+            );
+
+            animation:shine 7s linear infinite;
+
+        }
+
+        /* حدود داخلية */
+
+        .phone-frame .screen-border{
+
+            position:absolute;
+
+            inset:8px;
+
+            border-radius:34px;
+
+            border:1px solid rgba(255,255,255,.05);
+
+            pointer-events:none;
+
+        }
+
+        /* ==========================================================
+        Animations
+        ========================================================== */
+
+        @keyframes phoneFloat{
+
+            0%{
+
+                transform:translateY(0px);
+
+            }
+
+            50%{
+
+                transform:translateY(-12px);
+
+            }
+
+            100%{
+
+                transform:translateY(0px);
+
+            }
+
+        }
+
+        @keyframes shine{
+
+            from{
+
+                left:-150%;
+
+            }
+
+            to{
+
+                left:180%;
+
+            }
+
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-ar);
+            background-color: var(--bg-dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            direction: rtl; /* Enforce RTL */
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           3. TYPOGRAPHY
+           ========================================================================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 800; /* Bolder for Arabic Cairo font */
+            line-height: 1.3;
+            letter-spacing: 0;
+        }
+
+        .en-text {
+            font-family: var(--font-en);
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .display-title {
+            font-size: clamp(2.5rem, 4.5vw + 1rem, 5rem);
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-light);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px auto;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #85d1ff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==========================================================================
+           4. GLOBAL COMPONENTS
+           ========================================================================== */
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(70, 171, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 30px rgba(70, 171, 229, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--white);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; left: 0; height: 1px;
+            background: linear-gradient(270deg, transparent, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-bg-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-card:hover::before { opacity: 1; }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(70, 171, 229, 0.1);
+            border: 1px solid rgba(70, 171, 229, 0.2);
+            border-radius: 100px;
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            margin-bottom: 24px;
+        }
+
+        /* ==========================================================================
+           5. BACKGROUND EFFECTS & ANIMATIONS
+           ========================================================================== */
+        
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -10%; right: -10%; /* Flipped for RTL feel */
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #2a0845 0%, transparent 70%);
+            bottom: 10%; left: -5%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #0f3460 0%, transparent 70%);
+            top: 40%; right: 40%;
+            animation-delay: -10s;
+        }
+
+        #cursor-glow {
+            position: fixed;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(70, 171, 229, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: width 0.3s, height 0.3s;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, -50px) scale(1.1); }
+            66% { transform: translate(20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(70, 171, 229, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(70, 171, 229, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(70, 171, 229, 0.2); }
+        }
+
+        /* ==========================================================================
+           6. LAYOUT & SECTIONS
+           ========================================================================== */
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0; right: 0; width: 100%; /* RTL */
+            padding: 24px 0;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(8, 19, 31, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 16px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+      .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-en); /* Keep logo in English styling */
+        }
+
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+        
+        .logo img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--gray-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; right: 0; /* RTL Fix */
+            width: 0%; height: 2px;
+            background: var(--primary);
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions { display: flex; gap: 16px; align-items: center; }
+
+        .mobile-menu-btn {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 120px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--gray-light);
+            margin: 24px 0 40px;
+            max-width: 540px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Premium Phone Mockup (CSS Based) */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            width: 320px;
+            height: 650px;
+            background: #000;
+            border-radius: 50px;
+            border: 12px solid #1a1a1a;
+            position: relative;
+            box-shadow: 
+                0 0 0 2px #333,
+                0 30px 60px rgba(0,0,0,0.8),
+                0 0 80px rgba(70, 171, 229, 0.2);
+            transform: rotateY(15deg) rotateX(5deg); /* Flipped for RTL */
+            transform-style: preserve-3d;
+            animation: float-phone 6s ease-in-out infinite alternate;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 120px; height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%; height: 100%;
+            border-radius: 36px;
+            overflow: hidden;
+            background: var(--bg-surface);
+            position: relative;
+        }
+
+        .app-ui {
+            padding: 40px 20px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: linear-gradient(180deg, #10253B 0%, #08131F 100%);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .ui-circle { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+        .ui-lines { display: flex; flex-direction: column; gap: 6px; flex: 1; margin: 0 16px; }
+        .ui-line { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+        .ui-line.short { width: 60%; }
+
+        .app-scan-area {
+            height: 200px;
+            border-radius: 20px;
+            border: 1px dashed var(--primary);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(70, 171, 229, 0.05);
+            overflow: hidden;
+        }
+        
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            animation: scan 2s linear infinite;
+        }
+
+        .car-wireframe { font-size: 80px; color: rgba(255,255,255,0.2); }
+        
+        .app-card {
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.05);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .card-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(70, 171, 229, 0.2); display: flex; align-items: center; justify-content: center; color: var(--primary); }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        @keyframes float-phone {
+            0% { transform: rotateY(15deg) rotateX(5deg) translateY(0); }
+            100% { transform: rotateY(10deg) rotateX(2deg) translateY(-20px); }
+        }
+
+        /* --- Trusted By (Marquee) --- */
+        .trusted-section {
+            padding: 40px 0;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(16, 37, 59, 0.3);
+            overflow: hidden;
+        }
+
+        .trusted-text {
+            text-align: center;
+            color: var(--gray-light);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .marquee-container {
+            display: flex;
+            width: 200%;
+            animation: marquee 30s linear infinite;
+        }
+        
+        .marquee-container:hover { animation-play-state: paused; }
+
+        .marquee-content {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            align-items: center;
+        }
+
+        .partner-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-light);
+            opacity: 0.5;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-en); /* Brands usually stay in English */
+            direction: ltr;
+        }
+
+        .partner-logo:hover { opacity: 1; color: var(--white); }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); } /* Reversed for RTL visual flow */
+        }
+
+        /* --- Features Grid --- */
+        .features-section { padding: var(--section-padding); position: relative; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .feature-card {
+            padding: 40px 32px;
+            text-align: right; /* RTL Text Align */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-icon-wrapper {
+            width: 64px; height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(70, 171, 229, 0.2) 0%, rgba(70, 171, 229, 0.05) 100%);
+            border: 1px solid rgba(70, 171, 229, 0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; color: var(--primary);
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            transform: scale(1.1) rotate(-5deg); /* Flipped rotation */
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(70, 171, 229, 0.3);
+        }
+
+        .feature-title { font-size: 1.5rem; margin-bottom: 8px; }
+        .feature-desc { color: var(--gray-light); line-height: 1.7; font-weight: 500; }
+
+        /* --- AI Diagnosis Section --- */
+        .ai-section {
+            padding: var(--section-padding);
+            background: radial-gradient(circle at center, rgba(16, 37, 59, 0.8) 0%, var(--bg-dark) 100%);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .ai-content {
+            text-align: right; /* RTL Fix */
+        }
+
+        .ai-visual {
+            position: relative;
+            border-radius: var(--radius-xl);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, transparent 50%, var(--primary) 100%);
+            box-shadow: 0 0 40px rgba(70, 171, 229, 0.15);
+        }
+
+        .ai-visual-inner {
+            background: var(--bg-dark);
+            border-radius: calc(var(--radius-xl) - 2px);
+            padding: 40px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            direction: ltr; /* Code block should stay LTR */
+            text-align: left;
+        }
+
+        .code-block {
+            font-family: monospace;
+            color: #a5d6ff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        .code-keyword { color: #ff7b72; }
+        .code-string { color: #a5d6ff; }
+        .code-comment { color: #8b949e; }
+
+        .scanning-reticle {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px; height: 200px;
+            border: 2px solid rgba(70, 171, 229, 0.3);
+            border-radius: 50%;
+            animation: pulse-glow 3s infinite;
+        }
+        
+        .scanning-reticle::before, .scanning-reticle::after {
+            content: ''; position: absolute; background: var(--primary);
+        }
+        .scanning-reticle::before { top: -10px; left: 50%; width: 2px; height: 20px; transform: translateX(-50%); }
+        .scanning-reticle::after { top: 50%; left: -10px; width: 20px; height: 2px; transform: translateY(-50%); }
+
+        /* --- Statistics --- */
+        .stats-section { padding: 80px 0; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 24px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            font-family: var(--font-en); /* Keep numbers LTR styled for clarity */
+            direction: ltr;
+        }
+        
+        .stat-suffix { font-size: 2rem; color: var(--primary); margin-left: 4px; }
+        .stat-label { color: var(--gray-light); font-size: 1.1rem; font-weight: 600; }
+
+        /* --- App Screens (Swiper) --- */
+        .screens-section { padding: var(--section-padding); overflow: hidden; }
+        
+        .swiper-container {
+            width: 100%;
+            padding: 60px 0;
+            overflow: visible;
+            mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+           -webkit-mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+            
+        }
+        
+        .swiper-slide {
+            width: 300px;
+            transition: var(--transition-smooth);
+            opacity: 0.4;
+            transform: scale(0.85);
+        }
+        
+        .swiper-slide-active { opacity: 1; transform: scale(1); }
+        
+        .screen-mockup {
+            width: 100%;
+            border-radius: 32px;
+            border: 8px solid #1a1a1a;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: var(--bg-surface);
+            overflow: hidden;
+            aspect-ratio: 9/19.5;
+            position: relative;
+        }
+
+        .screen-content { padding: 24px; height: 100%; background: #0b1724; display: flex; flex-direction: column; text-align: right;}
+        .screen-header { display: flex; justify-content: space-between; margin-bottom: 24px; align-items: center; }
+        .sh-circle { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+        .screen-chart { height: 150px; background: rgba(70,171,229,0.1); border-radius: 16px; margin-bottom: 24px; border-bottom: 2px solid var(--primary);}
+        .screen-list { display: flex; flex-direction: column; gap: 12px; }
+        .sl-item { height: 60px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; padding: 0 16px; gap:12px;}
+        .sl-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(70,171,229,0.2); }
+        .sl-line { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; width: 60%; }
+
+        /* --- Download CTA --- */
+        .cta-section { padding: 80px 0 120px; }
+        .cta-box {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, #0d2847 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box::before {
+            content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(70, 171, 229, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 80px 0 40px;
+            background: var(--bg-dark);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand p { color: var(--gray-light); margin-top: 24px; max-width: 300px; font-weight: 500; }
+        
+        .footer-title { font-size: 1.125rem; font-weight: 700; margin-bottom: 24px; color: var(--white); }
+        
+        .footer-links { display: flex; flex-direction: column; gap: 16px; }
+        .footer-links a { color: var(--gray-light); transition: var(--transition-fast); font-weight: 500; }
+        .footer-links a:hover { color: var(--primary); padding-right: 6px; } /* RTL Hover Fix */
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--gray-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .social-links { display: flex; gap: 16px; }
+        .social-links a {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 1.2rem;
+            transition: var(--transition-smooth);
+        }
+        .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+
+        /* ==========================================================================
+           7. RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .hero-grid, .ai-grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero-desc { text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .ai-grid .ai-visual { order: -1; }
+            .ai-content { text-align: center; }
+            .ai-content ul { align-items: center; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --section-padding: 80px 0; }
+            .nav-actions .btn-outline { display: none; }
+            .mobile-menu-btn { display: block; }
+             .logo { font-size: 1.25rem; }
+            .logo img { height: 28px; }
+            
+            /* Mobile Menu Styles */
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background: rgba(8, 19, 31, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 32px 24px;
+                gap: 24px;
+                border-bottom: 1px solid var(--border-glass);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: var(--transition-smooth);
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            
+            .stats-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 24px; text-align: center; }
+            .display-title { font-size: 2.5rem; }
+            .marquee-content { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .phone-mockup { width: 280px; height: 580px; }
+            .btn { width: 100%; justify-content: center; }
+            .hero-buttons { width: 100%; flex-direction: column; }
+            .glass-card { padding: 24px; }
+            .cta-box { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-noise"></div>
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div id="cursor-glow"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+           <a href="#" class="logo">
+            Dr.Car
+                <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784779094/Asset_6_hnc1rc.png" alt="Dr.Car Logo">
+                
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="https://engabdallahalrefai.github.io/my-portfolio-website/">من نحن</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#ai">محرك الذكاء الاصطناعي</a></li>
+                
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://www.dropbox.com/scl/fi/fsrm8l6c3jys46s37rs4q/Dr.Car.apk?rlkey=dq1sjrqndxg8xvduwt4j1gg78&st=gqgl5qy2&dl=1" class="btn btn-primary en-text">
+                    <i class="ph ph-android-logo"></i> Android
+                </a>
+                <button class="mobile-menu-btn"><i class="ph ph-list"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge" data-aos="fade-up">
+                    <i class="ph-fill ph-sparkle"></i> مستقبل العناية بالسيارات
+                </div>
+                
+                <h1 class="display-title" data-aos="fade-up" data-aos-delay="100">
+                    مرافق ذكي<br>يفهم سيارتك
+                </h1>
+                
+                <p class="hero-desc" data-aos="fade-up" data-aos-delay="300">
+                    منصة ذكية تحلل أعراض مركبتك، وتتنبأ بالأعطال قبل حدوثها، وتربطك بأفضل ورش الصيانة والخدمات المعتمدة في لمح البصر.
+                </p>
+                
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://www.dropbox.com/scl/fi/fsrm8l6c3jys46s37rs4q/Dr.Car.apk?rlkey=dq1sjrqndxg8xvduwt4j1gg78&st=gqgl5qy2&dl=1" class="btn btn-primary">
+                        <i class="ph ph-download-simple"></i> حمل التطبيق
+                    </a>
+                    <a href="https://youtu.be/5Jq7e4nU64g" class="btn btn-outline">
+                        <i class="ph-fill ph-play-circle"></i>شاهد العرض التعريفي
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual" data-aos="zoom-in-right" data-aos-duration="1000">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-ui">
+                            <div class="app-header">
+                                <i class="ph ph-bell" style="color: white; font-size: 20px;"></i>
+                                <div class="ui-lines" style="align-items: flex-end;">
+                                    <div class="ui-line"></div>
+                                    <div class="ui-line short"></div>
+                                </div>
+                                <div class="ui-circle"></div>
+                            </div>
+                            
+                            <div class="app-scan-area">
+                                <i class="ph ph-car-profile car-wireframe"></i>
+                                <div class="scan-line"></div>
+                                <div style="position:absolute; bottom: 20px; color: var(--primary); font-size: 11px; font-weight: 700; font-family: var(--font-en);">
+                                    ANALYZING ENGINE DATA...
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+                                <div class="app-card" style="flex-direction: row-reverse;">
+                                    <div class="card-icon"><i class="ph-fill ph-warning-circle"></i></div>
+                                    <div class="ui-lines" style="margin:0; align-items: flex-end;">
+                                        <div class="ui-line" style="width: 80%; background: #ff4757;"></div>
+                                        <div class="ui-line short"></div>
+                                    </div>
+                                </div>
+                                <div class="app-card" style="flex-direction: row-reverse;">
+                                    <div class="card-icon"><i class="ph-fill ph-check-circle" style="color: #2ed573;"></i></div>
+                                    <div class="ui-lines" style="margin:0; align-items: flex-end;">
+                                        <div class="ui-line" style="width: 60%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <!--<section class="trusted-section">
+        <div class="container">
+            <p class="trusted-text">شركاء النجاح الموثوقين</p>
+        </div>
+        <div class="marquee-container" style="direction: ltr;">
+            <div class="marquee-content">
+                <div class="partner-logo"><i class="ph-fill ph-steering-wheel"></i> AutoTech</div>
+                <div class="partner-logo"><i class="ph-fill ph-wrench"></i> FixIt Pro</div>
+                <div class="partner-logo"><i class="ph-fill ph-shield-check"></i> SecureDrive</div>
+                <div class="partner-logo"><i class="ph-fill ph-engine"></i> MotorCore</div>
+                <div class="partner-logo"><i class="ph-fill ph-gas-pump"></i> EcoFuel</div>
+            </div>
+             Duplicate for infinite loop 
+            <div class="marquee-content">
+                <div class="partner-logo"><i class="ph-fill ph-steering-wheel"></i> AutoTech</div>
+                <div class="partner-logo"><i class="ph-fill ph-wrench"></i> FixIt Pro</div>
+                <div class="partner-logo"><i class="ph-fill ph-shield-check"></i> SecureDrive</div>
+                <div class="partner-logo"><i class="ph-fill ph-engine"></i> MotorCore</div>
+                <div class="partner-logo"><i class="ph-fill ph-gas-pump"></i> EcoFuel</div>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- Features -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="badge" data-aos="fade-up">إمكانيات المنصة</div>
+            <h2 class="section-title" data-aos="fade-up">كل ما تحتاجه، <br><span class="text-gradient">في تطبيق ذكي واحد.</span></h2>
+            <p class="section-subtitle" data-aos="fade-up">يجمع Dr.Car بين قوة الذكاء الاصطناعي في التشخيص وسوق شامل يلبي كافة احتياجات سيارتك من الصيانة وقطع الغيار وغيرها من الخدمات.</p>
+            
+            <div class="features-grid">
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-brain"></i></div>
+                    <h3 class="feature-title">التشخيص بالذكاء الاصطناعي</h3>
+                    <p class="feature-desc">أدخل أعراض سيارتك أو امسح بيانات OBD2. شبكتنا العصبية تحدد المشكلة الجذرية فوراً بدقة تصل إلى 98%.</p>
+                </div>
+                
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-wifi-slash"></i></div>
+                    <h3 class="feature-title">العمل بدون إنترنت</h3>
+                    <p class="feature-desc">عالق في منطقة بدون تغطية؟ لا تقلق فنموذجنا المدرب محلياً ليس بحاجة للانترنت لكي يخدمك.</p>
+                </div>
+                
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-translate"></i></div>
+                    <h3 class="feature-title">دعم كامل للعربية</h3>
+                    <p class="feature-desc">تجربة مستخدم مصممة خصيصاً للمنطقة. واجهة عربية أصيلة لضمان أقصى درجات السهولة والوصول.</p>
+                </div>
+                
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-magnifying-glass"></i></div>
+                    <h3 class="feature-title">البحث الذكي</h3>
+                    <p class="feature-desc">اعثر فوراً على أقرب الورش المعتمدة، وقطع الغيار الأصلية، والفنيين المتخصصين بناءً على تشخيصنا.</p>
+                </div>
+                
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-wrench"></i></div>
+                    <h3 class="feature-title">المساعدة على الطريق</h3>
+                    <p class="feature-desc">طوارئ بلمسة واحدة. اطلب شاحنات القطر، شحن البطارية، وتغيير الإطارات لتصل إلى موقعك الجغرافي مباشرة.</p>
+                </div>
+                
+                <div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon-wrapper"><i class="ph-fill ph-calendar-check"></i></div>
+                    <h3 class="feature-title">حجز مواعيد الصيانة</h3>
+                    <p class="feature-desc">جدول مواعيد الصيانة الدورية، تتبع سجل خدمة مركبتك، واحصل على أسعار شفافة قبل وصولك للورشة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Diagnosis -->
+    <section class="ai-section" id="ai">
+        <div class="container ai-grid">
+            <div class="ai-content" data-aos="fade-left">
+                <div class="badge">ذكاء اصطناعي حصري</div>
+                <h2 class="section-title" style="text-align: right;">المحرك العصبي للتشخيص</h2>
+                <p class="hero-desc" style="text-align: right;">
+                   تتميز المنصة بنموذج ذكاء اصطناعي مدرب محلياً على بيانات عربية خصوصاً اللهجة السورية المحلية , النموذج لا يخمن .... بل يحدد النظام المصاب بالعطل وعليه يتنبأ بالعطل بناءً على النص الحر المدخل من  مستخدم غير متخصص
+                </p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
+                    <li style="display: flex; gap: 12px; align-items: center;"><i class="ph-fill ph-check-circle" style="color: var(--primary); font-size: 1.5rem;"></i> التعرف على النظام الذي به الخلل</li>
+                    <li style="display: flex; gap: 12px; align-items: center;"><i class="ph-fill ph-check-circle" style="color: var(--primary); font-size: 1.5rem;"></i> تحليل العطل بناءً على الأعراض</li>
+                    <li style="display: flex; gap: 12px; align-items: center;"><i class="ph-fill ph-check-circle" style="color: var(--primary); font-size: 1.5rem;"></i> التنبؤ بمسبب العطل بدقة</li>
+                </ul>
+                <!--<a href="#" class="btn btn-primary">اقرأ المستند التقني</a>-->
+            </div>
+            
+            <div class="ai-visual" data-aos="fade-right">
+                <div class="ai-visual-inner">
+                    <div class="scanning-reticle"></div>
+                    <div class="code-block">
+                        <span class="code-comment">// Dr.Car Diagnostic Stream V1.0</span><br>
+                        <span class="code-keyword">import</span> { NeuralNet } <span class="code-keyword">from</span> <span class="code-string">'@drcar/ai'</span>;<br><br>
+                        <span class="code-keyword">async function</span> analyzeVehicle(data) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> model = <span class="code-keyword">await</span> NeuralNet.load(<span class="code-string">'engine_v2'</span>);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> symptoms = data.audio_signature;<br><br>
+                        &nbsp;&nbsp;<span class="code-comment">/* Processing temporal sequence... */</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> prediction = model.predict(symptoms);<br><br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (prediction.confidence > <span class="code-string">0.95</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;issue: <span class="code-string">"Timing Chain Wear"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;severity: <span class="code-string">"CRITICAL"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action: <span class="code-string">"Immediate Replacement"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card glass-card" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="stat-number">
+                        <span class="counter" data-target="2">0</span>
+                    </div>
+
+                    <span class="stat-suffix" style="font-size: medium;">Offline & Online</span>
+
+                    <div class="stat-label">
+                        أوضاع تشخيص متعددة
+                    </div>
+                </div>
+                <div class="stat-card glass-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number"><span class="counter" data-target="120">0</span><span class="stat-suffix">+</span></div>
+                    <div class="stat-label">نوع عطل مبرمج</div>
+                </div>
+                <div class="stat-card glass-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number"><span class="counter" data-target="10">0</span><span class="stat-suffix">+</span></div>
+                    <div class="stat-label">خدمات متكاملة</div>
+                </div>
+                <div class="stat-card glass-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number"><span class="counter" data-target="24">0</span><span class="stat-suffix">/7</span></div>
+                    <div class="stat-label">دعم فني ذكي</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screens Slider -->
+    <section class="screens-section" id="screens">
+        <div class="container" style="text-align: center;">
+            <div class="badge" data-aos="fade-up">واجهة التطبيق</div>
+            <h2 class="section-title" data-aos="fade-up">تصميم بسيط وسلس،<br> وأداء هندسي فائق.</h2>
+            
+    
+                    <!-- App Screens Slider -->
+    <section class="screens-section" id="screens">
+        <div class="container" style="text-align: center;">
+            <div class="badge" data-aos="fade-up">واجهة التطبيق</div>
+            <h2 class="section-title" data-aos="fade-up">تصميم إبداعي،<br> وأداء هندسي فائق.</h2>
+            <p class="section-subtitle" data-aos="fade-up">تصفح واجهات التطبيق الفعلية واستمتع بتجربة مستخدم سلسة مصممة خصيصاً لراحتك.</p>
+        
+        <!-- Swiper -->
+        <div class="swiper-container app-slider" data-aos="fade-up" data-aos-delay="200" style="direction: ltr;">
+            <div class="swiper-wrapper">
+                
+                <!-- Slide 1: قم باستبدال رابط الصورة أو محتوى الشاشة هنا -->
+                <div class="swiper-slide">
+                    <div class="screen-mockup">
+                       <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784793830/5771922089022524802_121_g4c1st.webp" alt="شاشة التطبيق 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="screen-mockup">
+                       <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784783293/5771922089022524804_121_hxk04m.webp" alt="شاشة التطبيق 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="screen-mockup">
+                        <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784783293/5771922089022524807_121_bmu153.webp" alt="شاشة التطبيق 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="swiper-slide">
+                    <div class="screen-mockup">
+                       <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784783293/5771922089022524808_121_eluelv.webp" alt="شاشة التطبيق 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="swiper-slide">
+                    <div class="screen-mockup">
+                      <img src="https://res.cloudinary.com/kcctdauw/image/upload/v1784783293/5771922089022524806_121_mkqejv.webp" alt="شاشة التطبيق 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+        </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="cta-section" id="download">
+        <div class="container">
+            <div class="cta-box" data-aos="zoom-in">
+                <h2 class="section-title">مستعد لتجربة أذكى في العناية بسيارتك؟</h2>
+                <p class="section-subtitle" style="margin-bottom: 40px; color: #cbd5e1;">انضم إلى آلاف السائقين الذين يثقون بـ Dr.Car للتشخيص الموثوق، والصيانة الشاملة، وراحة البال الدائمة.</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="https://www.dropbox.com/scl/fi/fsrm8l6c3jys46s37rs4q/Dr.Car.apk?rlkey=dq1sjrqndxg8xvduwt4j1gg78&st=gqgl5qy2&dl=1" class="btn btn-primary" style="padding: 18px 36px; font-size: 1.1rem;">
+                        <i class="ph-fill ph-android-logo" style="font-size: 1.5rem;"></i> تحميل APK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i class="ph-fill ph-car-profile"></i> Dr.Car
+                    </a>
+                    <p>منصة مركبات مدعومة بالذكاء الاصطناعي تُحدث ثورة في العناية بالسيارات في منطقة الشرق الأوسط وشمال أفريقيا وخارجها.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">المنتج</h4>
+                    <div class="footer-links">
+                        <a href="#">المميزات</a>
+                        <a href="#">محرك الذكاء الاصطناعي</a>
+                        <a href="#">الورش المعتمدة</a>
+                        <a href="#">الأسعار</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">الشركة</h4>
+                    <div class="footer-links">
+                        <a href="#">من نحن</a>
+                        <a href="#">الوظائف</a>
+                        <a href="#">المركز الإعلامي</a>
+                        <a href="#">اتصل بنا</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">قانوني</h4>
+                    <div class="footer-links">
+                        <a href="#">شروط الخدمة</a>
+                        <a href="#">سياسة الخصوصية</a>
+                        <a href="#">أمن البيانات</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; جميع الحقوق محفوظة لصاحبه : عبدالله الرفاعي</div>
+                <div class="social-links" style="direction: ltr;">
+                    <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-github-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>-->
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        /* ==========================================================================
+           JS MODULE: App Initialization (js/app.js)
+           ========================================================================== */
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50
+            });
+
+            // 2. Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 3. Mouse Follow Glow Effect
+            const cursorGlow = document.getElementById('cursor-glow');
+            document.addEventListener('mousemove', (e) => {
+                requestAnimationFrame(() => {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                });
+            });
+
+            // Interactive element hover effect for glow
+            const interactiveElements = document.querySelectorAll('a, button, .glass-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorGlow.style.width = '500px';
+                    cursorGlow.style.height = '500px';
+                    cursorGlow.style.background = 'radial-gradient(circle, rgba(70, 171, 229, 0.25) 0%, transparent 70%)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorGlow.style.width = '400px';
+                    cursorGlow.style.height = '400px';
+                    cursorGlow.style.background = 'radial-gradient(circle, rgba(70, 171, 229, 0.15) 0%, transparent 70%)';
+                });
+            });
+
+            // 4. Mobile Menu Toggle Logic
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuIcon = mobileMenuBtn.querySelector('i');
+
+            if(mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    
+                    // Toggle Icon
+                    if (navLinks.classList.contains('active')) {
+                        mobileMenuIcon.classList.remove('ph-list');
+                        mobileMenuIcon.classList.add('ph-x');
+                    } else {
+                        mobileMenuIcon.classList.remove('ph-x');
+                        mobileMenuIcon.classList.add('ph-list');
+                    }
+                });
+
+                // Close mobile menu when clicking a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        mobileMenuIcon.classList.remove('ph-x');
+                        mobileMenuIcon.classList.add('ph-list');
+                    });
+                });
+            }
+
+            /* ==========================================================================
+               JS MODULE: Slider Initialization (js/slider.js)
+               ========================================================================== */
+            
+            const swiper = new Swiper('.app-slider', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2,
+                    slideShadows: false,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1.2 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+
+            /* ==========================================================================
+               JS MODULE: Counter Animations (js/counters.js)
+               ========================================================================== */
+            
+            const counters = document.querySelectorAll('.counter');
+            let hasAnimated = false;
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000; // ms
+                    const increment = target / (duration / 16); // 60fps
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCounter();
+                });
+            };
+
+            // Intersection Observer for Counters
+            const observerOptions = { threshold: 0.5 };
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        animateCounters();
+                        hasAnimated = true;
+                    }
+                });
+            }, observerOptions);
+
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+
+            /* ==========================================================================
+               JS MODULE: Advanced GSAP Parallax
+               ========================================================================== */
+            
+            // Subtle parallax on ambient orbs based on mouse movement (RTL inverted logically if needed, but aesthetic holds)
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                gsap.to('.orb-1', { x: -x * 2, y: y * 2, duration: 1, ease: 'power2.out' }); // Flipped X for RTL feel
+                gsap.to('.orb-2', { x: x * 1.5, y: -y * 1.5, duration: 1, ease: 'power2.out' });
+                gsap.to('.orb-3', { x: -x, y: -y, duration: 1, ease: 'power2.out' });
+            });
+        });
+    </script>
+</body>
+</html>
